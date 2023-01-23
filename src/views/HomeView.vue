@@ -1,40 +1,87 @@
-<template>
-  <v-main>
-    <v-card id="card_home">
-      <h1> Bem vindo, {{ name }}</h1><br><br>
+ <template>
+    <v-app id="inspire">
+      <v-app-bar>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <router-link to="/about">About</router-link>
+        <v-toolbar-title>Application</v-toolbar-title>
+      </v-app-bar>
 
-      <br><br>
+      <v-navigation-drawer
+          v-model="drawer"
+          temporary
+      >
+        <v-list-item link to="/home">
+          <v-list-item-title>
+            Home
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item link to="/create">
+          <v-list-item-title>
+            Cadastramento Empresarial
+          </v-list-item-title>
+        </v-list-item>
+        <v-divider class="my-2"></v-divider>
+        <v-list-item link>
+          <v-list-item-title @click="logout">
+            Logout <v-icon icon="mdi-logout"></v-icon>
+          </v-list-item-title>
+        </v-list-item>
 
-      <v-btn class="logout" @click="Logout"> Logout</v-btn>
-    </v-card>
-  </v-main>
-</template>
+      </v-navigation-drawer>
+
+      <v-main class="bg-grey-lighten-2">
+        <v-container>
+          <v-row>
+            <template v-for="n in 4" :key="n">
+              <v-col
+                  class="mt-2"
+                  cols="12"
+              >
+                <strong>Category {{ n }}</strong>
+              </v-col>
+
+              <v-col
+                  v-for="j in 6"
+                  :key="`${n}${j}`"
+                  cols="6"
+                  md="2"
+              >
+                <v-sheet height="150"></v-sheet>
+              </v-col>
+            </template>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </template>
 <script>
-import { ref, onBeforeMount } from 'vue';
-import firebase from "firebase/compat";
+import axios from "axios";
+import router from "../router";
 
 export default {
-  setup(){
-    const name = ref("")
-    onBeforeMount(() => {
-      const user = firebase.auth().currentUser
-      if (user){
-        name.value = user.email.split('@')[0]
+  data: () => ({ drawer: null }),
+  methods :{
+    async logout() {
+      const url = "https://solicitasol.cordeiro.com.br/graphql"
+      const query = "mutation Deslogar {\n deslogar\n}\n"
+      const headers = {
+        "Authorization":`Bearer ${this.token}`,
+        "content-type":"application/json"
       }
-    })
-    const Logout = () => {
-      firebase
-          .auth()
-          .signOut()
-          .then(() => console.log("Signed Out"))
-          .catch(err => alert(err.message))
-    }
-
-    return{
-      name,
-      Logout
+      const queryGraphql = {
+        "operationName":"Deslogar",
+        "query":query,
+        "variables":{}
+      }
+      const response = await axios({
+        url:url,
+        method:'post',
+        headers:headers,
+        data:queryGraphql
+      })
+          .then(
+              router.push('/')
+          )
     }
   }
 }
@@ -44,29 +91,5 @@ export default {
 v-main{
   background-color: #A2AF9F;
   display: flex;
-}
-#card_home{
-  width: 50vw;
-  text-align: center;
-  color: #3F4A3C;
-  margin: auto;
-  padding: 4.5%;
-  box-shadow: 0 4px 8px 0 #3F4A3C;
-  transition: 0.8s;
-}
-#card_home:hover{
-  box-shadow: 0 8px 10px 0 #3F4A3C;
-}
-@media screen and (max-width: 500px){
-  #card_home{
-    margin-top: 5%;
-    width: 80%;
-    padding: 8%;
-    box-shadow: 0 4px 8px 0 #3F4A3C;
-    transition: 0.8s;
-  }
-  #card_home:hover {
-    box-shadow: 0 8px 10px 0 #3F4A3C;
-  }
 }
 </style>

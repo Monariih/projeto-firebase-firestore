@@ -5,7 +5,6 @@ import vuetify from './plugins/vuetify'
 import firebase from "firebase/compat";
 import { loadFonts } from './plugins/webfontloader'
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyDPKy7IF9dhj5tuKULF8-rYuJzO7J1W4hE",
     authDomain: "teste-consumir-api.firebaseapp.com",

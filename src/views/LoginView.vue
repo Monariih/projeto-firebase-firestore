@@ -4,52 +4,63 @@
       <hr><br>
         <v-img id="logo_corsol" src="https://uploads-ssl.webflow.com/63235e08d659e25502559daf/63235e44d40246d10737645b_logo-corsolar-negativo.svg"></v-img>
       <br><hr><br>
-
-      <form @submit.prevent="Login">
-        <input type="text" placeholder="Email" v-model="email"/><br><br>
+      <form @submit.prevent="login">
+        <input type="email" placeholder="Email" v-model="email"/><br><br>
         <input type="password" placeholder="Senha" v-model="password"/><br><br>
-        <v-btn type="submit" value="Login">Login</v-btn>
+        <v-btn type="submit" value="Post">
+          Login <v-icon icon="mdi-login"></v-icon>
+        </v-btn>
       </form>
-
-        <br><br>
-        Ainda Não registrado?<br><br>
-        <router-link to="/signUp">Criar Conta</router-link>
-
-
     </v-card>
   </main>
 </template>
-
 <script>
-import {ref} from "vue";
-import firebase from "firebase/compat";
-import {useRouter} from "vue-router";
-
-
+import axios from "axios";
+import router from "../router";
 export default {
-  setup() {
-    const email = ref("")
-    const password = ref("")
-    const router = useRouter()
-
-    const Login = () => {
-      firebase
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value)
-          .then((data) => {
-            router.push('/home')
-          })
-          .catch(err => alert(err.message))
+  data() {
+    return{
+      email: null,
+      password: null,
+      forcarLogin: true,
+      isRemenberMe: false,
     }
-    return {
-      Login,
-      email,
-      password
+  },
+  methods: {
+    async login() {
+      const url = "https://solicitasol.cordeiro.com.br/graphql"
+      const query = "mutation Logar($email: String!, $password: String!," +
+          " $isRememberMe: Boolean, $forcarLogin: Boolean, $tokenTFA: String)" +
+          " {\n  logar(email: $email, password: $password, isRememberMe: $isRememberMe," +
+          " forcarLogin: $forcarLogin, tokenTFA: $tokenTFA) {\n    token\n    existeOutraSessao\n" +
+          "    refreshToken\n  }\n}\n"
+      const headers = {
+        "content-type":"application/json"
+      }
+      const queryGraphQl = {
+        "operationName":"Logar",
+        "query":query,
+        "variables":{'email':`${this.email}`,
+          'forcarLogin':true,
+          'isRememberMe':false,
+          'password':`${this.password}`}
+      }
+      const response = await axios({
+        url:url,
+        method:'post',
+        headers:headers,
+        data:queryGraphQl
+      })
+      console.log(response)
+      this.token = response.data.data.logar.token
+      console.log(this.token)
+      if (this.token != ""){
+        router.push('/home')
+      }
     }
   }
 }
 </script>
-
 <style>
 main{
   background-color: #A2AF9F;
