@@ -3,7 +3,7 @@
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title><img id="logo_corsol_header" src="https://uploads-ssl.webflow.com/63235e08d659e25502559daf/63235e44d40246d10737645b_logo-corsolar-negativo.svg"></v-toolbar-title>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -60,6 +60,7 @@
 
             <v-card id="adc_nome_empresa">
               <v-text-field
+                  variant="outlined"
                   label="Nome Fantasia"
                   :rules="rules"
                   hide-details="auto"
@@ -78,11 +79,17 @@
               <v-divider></v-divider><br>
 
               <v-card-actions>
-                  <v-file-input
-                      label="File input"
-                      filled
-                      prepend-icon="mdi-camera">
-                  </v-file-input>
+                <v-file-input
+                    v-model="fotoEmpresa"
+                    color="deep-purple-accent-4"
+                    counter
+                    label="Foto"
+                    multiple
+                    placeholder="Select your files"
+                    prepend-icon="mdi-camera"
+                    variant="outlined"
+                    :show-size="1000"
+                ></v-file-input>
               </v-card-actions>
             </v-card>
 
@@ -93,12 +100,14 @@
               <div id="outras_info">
                     <div id="selectCadastroDir">
                       <v-select
+                          variant="outlined"
                           :items="tiposCadastro"
                           filled
                           label="Responsável"
                       ></v-select>
 
                       <v-select
+                          variant="outlined"
                           :items="tiposCadastro"
                           filled
                           label="Tipo de contrato"
@@ -108,13 +117,15 @@
                   <div id="selectCadastro">
 
                     <v-select
+                        variant="outlined"
                         :items="estados"
                         filled
                         label="Estado"
                     ></v-select>
 
                    <v-select
-                      :items="estados"
+                       variant="outlined"
+                      :items="cidades"
                       filled
                       label="Cidade"
                     ></v-select>
@@ -127,6 +138,7 @@
                   <div id="input_field">
                     <div id="input_cnpj">
                       <v-text-field
+                          variant="outlined"
                           label="CNPJ"
                           :rules="rules"
                           hide-details="auto"
@@ -135,6 +147,7 @@
                     </div>
                     <div id="input_inscriEstadual">
                       <v-text-field
+                          variant="outlined"
                           label="Inscrição estadual"
                           :rules="rules"
                           hide-details="auto"
@@ -156,6 +169,7 @@
                 <div id="input_field_user">
                   <div id="input_nomeSobrenome">
                     <v-text-field
+                        variant="outlined"
                         label="Nome e Sobrenome"
                         :rules="rules"
                         hide-details="auto"
@@ -164,47 +178,82 @@
                   </div>
                   <div id="input_email">
                     <v-text-field
+                        variant="outlined"
                         label="E-mail"
                         :rules="rules"
                         hide-details="auto"
                         v-model="emailAcesso"
                     ></v-text-field>
                   </div>
-                </div>
-                <div id="input_field_user">
+
                   <div id="input_telefone">
                     <v-text-field
+                        variant="outlined"
                         label="Telefone"
                         :rules="rules"
                         hide-details="auto"
                         v-model="telefone"
                     ></v-text-field>
                   </div>
-                  <div id="input_email">
-                    <v-text-field
-                        label="Email"
-                        :rules="rules"
-                        hide-details="auto"
-                        v-model="email"
-                    ></v-text-field>
-                  </div>
+
+
                   <div id="input_password">
-                    <v-text-field
-                        :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-                        :rules="[rules.required, rules.emailMatch]"
-                        :type="show4 ? 'text' : 'password'"
-                        name="input-10-2"
-                        label="Error"
-                        hint="At least 8 characters"
-                        value="Pa"
-                        error
-                        @click:append="show4 = !show4"
-                    ></v-text-field>
+                    <v-row>
+                      <v-col
+                          cols="12"
+                          sm="6"
+                      >
+                        <v-text-field
+                            variant="outlined"
+                            v-model="cadastraPassword"
+                            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                            :rules="[rules.required, rules.min]"
+                            :type="show1 ? 'text' : 'password'"
+                            label="Senha"
+                            hint="Minimo 8 caracteres"
+                            counter
+                            @click:append="show1 = !show1"
+                        ></v-text-field>
+                      </v-col>
+
+                      <v-col
+                          cols="12"
+                          sm="6"
+                      >
+                        <v-text-field
+                            variant="outlined"
+                            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                            :rules="[rules.required, rules.min]"
+                            :type="show2 ? 'text' : 'password'"
+                            name="input-10-2"
+                            label="confirmar senha"
+                            hint="Minimo 8 caracteres"
+                            class="input-group--focused"
+                            @click:append="show2 = !show2"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
                   </div>
                 </div>
-
               </div>
+
             </v-card>
+
+            <br><v-divider>
+            </v-divider><br>
+
+          <div id="btn_agree">
+            <v-btn
+                type="submit"
+                value="Post"
+                color="success">
+              Cadastrar
+              <v-icon
+                  icon="mdi-checkbox-marked-circle">
+              </v-icon>
+            </v-btn>
+          </div>
+
           </div>
         </v-form>
     </v-main>
@@ -226,12 +275,22 @@ export default {
       'Pará (PA)', 'Paraíba (PB)', 'Paraná (PR)', 'Pernambuco (PE)', 'Piauí (PI)', 'Rio de Janeiro (RJ)',
       'Rio Grande do Norte (RN)', 'Rio Grande do Sul (RS)', 'Rondônia (RO)', 'Roraima (RR)', 'Santa Catarina (SC)',
       'São Paulo (SP)', 'Sergipe (SE)', 'Tocantins (TO)'],
+    cidades: ['cidades', 'cidades1','cidades2'],
     imgPreview: '',
     nomeEmpresa: '',
     cnpj: '',
     inscri_estadual: '',
+    nome_sobrenome: '',
+    emailAcesso: '',
+    telefone: '',
     drawer: null,
-    ex11:'primary'}),
+    ex11:'primary',
+    show1: false,
+    show2: true,
+    cadastraPassword: '',
+      required: value => !!value || 'Required.',
+      min: v => v.length >= 8 || 'Minimo 8 caracteres',
+    }),
   methods : {
     async logout() {
       const url = "https://solicitasol.cordeiro.com.br/graphql"
@@ -251,16 +310,21 @@ export default {
         headers: headers,
         data: queryGraphql
       })
+
           .then(
               router.push('/')
           )
+
     }
   }
 }
 </script>
 <style>
+#logo_corsol_header{
+  width: 11rem;
+}
 #formularioGerar {
-  padding: 2.5rem;
+  padding: 3rem;
   width: 100%;
 }
 #tiutlo_e_cancel_btn{
@@ -277,9 +341,6 @@ export default {
   display: inline-block;
   text-align: right;
 }
-#card_empresa{
-  padding: 2.5rem;
-}
 #outras_info{
   padding: 2.5rem 2.5rem 0.5rem 2.5rem;
   display: flex;
@@ -290,14 +351,13 @@ export default {
   display: flex;
   width: 100%;
 }
-#apenas_inputs_user{
+#apenas_inputs_user,
+#adc_nome_empresa,
+#card_empresa{
   padding: 2.5rem;
 }
 #input_field,#input_field_user{
   width: 100%;
-}
-#adc_nome_empresa{
-  padding: 1rem;
 }
 #nome_empresa{
   text-align: center;
@@ -309,19 +369,30 @@ export default {
   width: 48%;
   margin: auto;
 }
-#input_cnpj,#input_inscriEstadual,#input_nomeSobrenome,#input_email{
+#input_password{
+  margin-top: 1.3%;
+}
+#input_cnpj,
+#input_inscriEstadual,
+#input_nomeSobrenome,
+#input_email{
   display: inline-block;
   width: 100%;
   margin: auto;
 }
+#btn_agree{
+  text-align: right;
+}
 @media screen and (max-width: 720px) {
-  #formularioGerar {
+  #formularioGerar,
+  #apenas_inputs_user,
+  #adc_nome_empresa,
+  #card_empresa,
+  #formularioGerar{
     padding: 1rem;
   }
-  #card_empresa{
-    padding: 1rem;
-  }
-  #outras_info, #apenas_inputs{
+  #outras_info,
+  #apenas_inputs{
     padding: 1rem;
     display: inline-block;
     width: 100%;
@@ -330,7 +401,9 @@ export default {
     padding: 0.5rem;
     text-align: center;
   }
-  #selectCadastro,#selectCadastroDir,#input_field{
+  #selectCadastro,
+  #selectCadastroDir,
+  #input_field{
     width: 100%;
     display: inline-block;
   }

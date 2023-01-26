@@ -3,7 +3,8 @@
       <v-app-bar>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Application</v-toolbar-title>
+        <v-toolbar-title id="header"><img id="logo_corsol_header" src="https://uploads-ssl.webflow.com/63235e08d659e25502559daf/63235e44d40246d10737645b_logo-corsolar-negativo.svg"></v-toolbar-title>
+
       </v-app-bar>
 
       <v-navigation-drawer
@@ -88,6 +89,9 @@ export default {
 
 </script>
 <style>
+#logo_corsol_header {
+  width: 11rem;
+}
 v-main{
   background-color: #A2AF9F;
   display: flex;
