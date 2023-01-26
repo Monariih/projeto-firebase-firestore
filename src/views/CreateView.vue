@@ -1,4 +1,9 @@
 <template>
+
+  <!-- Navbar é o cabeçalho onde segura o logo corsol,
+    e aonde começa o navigation drawer é onde habita o
+    menu lateral e todas as suas configurações.-->
+
   <v-app id="inspire">
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -52,9 +57,10 @@
           </div>
 
 
-          <br><v-divider></v-divider><br>
+          <br><v-divider><!-- Linha divisória horizontal --></v-divider><br>
 
-
+          <!-- Pedaços do formulário que solicitam a entrada
+           tanto do noe quanto o de uma imagem.-->
 
           <div id="empresa_foto_titulo">
 
@@ -76,7 +82,7 @@
                 <p>{{nomeEmpresa}}</p>
               </div>
 
-              <v-divider></v-divider><br>
+              <v-divider><!-- Linha divisória horizontal --></v-divider><br>
 
               <v-card-actions>
                 <v-file-input
@@ -95,6 +101,11 @@
 
           </div>
           <br>
+
+          <!--Entradas opicionais que devem conectar com
+          o banco de dados para receberem as informações
+          a serem preenchidas.-->
+
           <div id="options">
             <v-card>
               <div id="outras_info">
@@ -133,6 +144,10 @@
                   </div>
                 </div>
 
+              <!-- A partir deste ponto todas as entradas são
+               manuais e terão de ser guardadas como strings e
+               postadas por envio deste formulário.-->
+
               <div id="apenas_inputs">
 
                   <div id="input_field">
@@ -159,9 +174,9 @@
                 </div>
             </v-card>
             <br>
-            <v-divider></v-divider>
+            <v-divider><!-- Linha divisória horizontal --></v-divider>
               <div id="titulo_user"><h2>Usuário</h2></div>
-            <v-divider></v-divider>
+            <v-divider><!-- Linha divisória horizontal --></v-divider>
             <br>
             <v-card id="user_info">
               <div id="apenas_inputs_user">
@@ -239,8 +254,10 @@
 
             </v-card>
 
-            <br><v-divider>
-            </v-divider><br>
+            <br><v-divider><!-- Linha divisória horizontal --></v-divider><br>
+
+            <!-- Botão responsável por realizar o submit do
+             formulário e acionar a função "Cadastrar()"-->
 
           <div id="btn_agree">
             <v-btn
@@ -265,10 +282,18 @@ import router from "../router";
 
 export default {
   data: () => ({
+
+    /* Rules é a sequencia de regras que deve seguir o input
+    de nome fantasia.*/
+
     rules: [
       value => !!value || 'Obrigatório',
       value => (value && value.length >= 3) || 'Minino 3 caractéres',
     ],
+
+    /* Arrays feitos para substituir momentaneamente as
+     informações a serem extraidas da API*/
+
     tiposCadastro: ['Aprovado', 'Pendente', 'Rejeitado'],
     estados: ['Acre (AC)', 'Alagoas (AL)', 'Amapá (AP)', 'Amazonas (AM)', 'Bahia (BA)', 'Ceará (CE)', 'Distrito Federal (DF)',
       'Espírito Santo (ES)', 'Goiás (GO)', 'Maranhão (MA)', 'Mato Grosso (MT)', 'Mato Grosso do Sul (MS)', 'Minas Gerais (MG)',
@@ -276,6 +301,9 @@ export default {
       'Rio Grande do Norte (RN)', 'Rio Grande do Sul (RS)', 'Rondônia (RO)', 'Roraima (RR)', 'Santa Catarina (SC)',
       'São Paulo (SP)', 'Sergipe (SE)', 'Tocantins (TO)'],
     cidades: ['cidades', 'cidades1','cidades2'],
+
+    /* Variavei responsáveis por guardas os v-models dos inputs */
+
     imgPreview: '',
     nomeEmpresa: '',
     cnpj: '',
@@ -283,13 +311,19 @@ export default {
     nome_sobrenome: '',
     emailAcesso: '',
     telefone: '',
+    cadastraPassword: '',
+    required: value => !!value || 'Required.',
+    min: v => v.length >= 8 || 'Minimo 8 caracteres',
+
+    /*--------------------------------------------------------*/
+    /* Apenas dados responsáveis pelas estilizações,
+    tais como o deslize da barra de menu lateral.*/
+
+
     drawer: null,
     ex11:'primary',
     show1: false,
-    show2: true,
-    cadastraPassword: '',
-      required: value => !!value || 'Required.',
-      min: v => v.length >= 8 || 'Minimo 8 caracteres',
+    show2: true
     }),
   methods : {
     async logout() {

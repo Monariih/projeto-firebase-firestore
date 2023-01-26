@@ -13,6 +13,11 @@ import { onBeforeMount} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import firebase from "firebase/compat";
 export default {
+
+  //Função que não deixa burlar o login e entrar em alguma função
+  //sem a devida autenticação.
+
+
   setup() {
     const router = useRouter();
     const route = useRoute();

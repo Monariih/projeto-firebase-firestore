@@ -1,5 +1,10 @@
  <template>
-    <v-app id="inspire">
+
+   <!-- Navbar é o cabeçalho onde segura o logo corsol,
+    e aonde começa o navigation drawer é onde habita o
+    menu lateral e todas as suas configurações.-->
+
+   <v-app id="inspire">
       <v-app-bar>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -60,6 +65,10 @@ import axios from "axios";
 import router from "../router";
 
 export default {
+
+  //Exerce o papel de "guardar o token" de autorização para
+  //autoexplicativo com o nome logout()
+
   data: () => ({ drawer: null }),
   methods :{
     async logout() {
