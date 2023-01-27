@@ -17,6 +17,8 @@
 <script>
 import axios from "axios";
 import router from "../router";
+
+
 export default {
   data() {
     return{
@@ -27,8 +29,9 @@ export default {
     }
   },
   methods: {
+
     async login() {
-      const url = "https://solicitasol.cordeiro.com.br/graphql"
+      const url = "https://cordeiro.solarview.com.br/graphql"
       const query = "mutation Logar($email: String!, $password: String!," +
           " $isRememberMe: Boolean, $forcarLogin: Boolean, $tokenTFA: String)" +
           " {\n  logar(email: $email, password: $password, isRememberMe: $isRememberMe," +
@@ -51,6 +54,7 @@ export default {
         headers:headers,
         data:queryGraphQl
       })
+
       console.log(response)
       this.token = response.data.data.logar.token
       console.log(this.token)

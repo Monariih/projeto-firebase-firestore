@@ -34,8 +34,8 @@
 
     </v-navigation-drawer>
 
-    <v-main class="bg-grey-lighten-2">
-        <v-form @submit.prevent="generate" id="formularioGerar">
+    <v-main id="principal">
+        <v-form @submit.prevent="criaUsuarioEmpresarial" id="formularioGerar">
           <div id="tiutlo_e_cancel_btn">
 
             <div id="titulo">
@@ -259,18 +259,17 @@
             <!-- Botão responsável por realizar o submit do
              formulário e acionar a função "Cadastrar()"-->
 
-          <div id="btn_agree">
-            <v-btn
-                type="submit"
-                value="Post"
-                color="success">
-              Cadastrar
-              <v-icon
-                  icon="mdi-checkbox-marked-circle">
-              </v-icon>
-            </v-btn>
-          </div>
-
+            <div id="btn_agree">
+              <v-btn
+                  type="submit"
+                  value="Post"
+                  color="success">
+                Cadastrar
+                <v-icon
+                    icon="mdi-checkbox-marked-circle">
+                </v-icon>
+              </v-btn>
+            </div>
           </div>
         </v-form>
     </v-main>
@@ -326,8 +325,48 @@ export default {
     show2: true
     }),
   methods : {
+    async criaUsuarioEmpresarial() {
+      const url = "https://cordeiro.solarview.com.br/graphql"
+      const query = "mutation CriarUsuarioEmpresarial($input: UserCreateInput!," +
+          " $empresaInput: EmpresaCreateInput!)" +
+          " {\n  criarUsuarioEmpresarial(input:" +
+          " $input, empresaInput: $empresaInput)" +
+          " {\n    nome\n    empresa {\n      nome\n" +
+          "    }\n  }\n}\n"
+      const headers = {
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzdjp3ZWIiLCJzZXNzaW9uSWQiOiJPWnhWaF95VWhzVTY1MTcxY0ZnUUJDRjBYNE5mTjRXNSIsInN1YiI6OTg4LCJpYXQiOjE2NzQ4MjIyNjYsImV4cCI6MTY3NDg0Mzg2Nn0.rY4oznODkVd6yZCHU_DouZLZ5Fd3WkBSOe-uq04wl0U`,
+        "content-type": "application/json"
+      }
+      const queryGraphql = {
+        "operationName":"CriarUsuarioEmpresarial",
+        "query":query,
+        "variables":{
+          'empresaInput':{'nome': `${this.nomeEmpresa}`,
+          'cnpjCpf': `${this.cnpj}`,
+          'inscricaoEstadual': `${this.inscri_estadual}`},
+          'input':{'email':`${this.emailAcesso}`,
+          'senha':`${this.cadastraPassword}`,
+          'nome':`${this.nomeEmpresa}`,
+          'telefone':`${this.telefone}`},
+          'nome_sobrenome': `${this.nome_sobrenome}`
+        }
+      }
+      const response = await axios({
+        url:url,
+        method:'post',
+        headers:headers,
+        data:queryGraphql
+      })
+
+          .then(console.log(response),
+            alert(`${this.nomeEmpresa} Criado com sucesso`),
+            router.push('/home')
+          )
+    },
+
+
     async logout() {
-      const url = "https://solicitasol.cordeiro.com.br/graphql"
+      const url = "https://cordeiro.solarview.com.br/graphql"
       const query = "mutation Deslogar {\n deslogar\n}\n"
       const headers = {
         "Authorization": `Bearer ${this.token}`,
@@ -346,6 +385,7 @@ export default {
       })
 
           .then(
+              console.log(response),
               router.push('/')
           )
 
@@ -354,12 +394,24 @@ export default {
 }
 </script>
 <style>
+#principal{
+  background-color: #324B4D;
+  color: #f2f2f2;
+}
 #logo_corsol_header{
   width: 11rem;
 }
 #formularioGerar {
   padding: 3rem;
   width: 100%;
+}
+#user_info,
+#outras_info,
+#card_empresa,
+#adc_nome_empresa,
+#apenas_inputs{
+  background-color: #004600;
+  color: #ffffff;
 }
 #tiutlo_e_cancel_btn{
   display: flex;
@@ -409,10 +461,12 @@ export default {
 #input_cnpj,
 #input_inscriEstadual,
 #input_nomeSobrenome,
-#input_email{
+#input_email,
+#input_password,
+#input_telefone{
   display: inline-block;
   width: 100%;
-  margin: auto;
+  margin: 1% 1% 1% 1%;
 }
 #btn_agree{
   text-align: right;

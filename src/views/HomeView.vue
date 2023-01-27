@@ -35,7 +35,7 @@
 
       </v-navigation-drawer>
 
-      <v-main class="bg-grey-lighten-2">
+      <v-main id="principal">
         <v-container>
           <v-row>
             <template v-for="n in 4" :key="n">
@@ -43,7 +43,10 @@
                   class="mt-2"
                   cols="12"
               >
-                <strong>Category {{ n }}</strong>
+                <strong> Guia {{ n }} </strong>
+
+
+
               </v-col>
 
               <v-col
@@ -69,7 +72,9 @@ export default {
   //Exerce o papel de "guardar o token" de autorização para
   //autoexplicativo com o nome logout()
 
-  data: () => ({ drawer: null }),
+  data: () => ({
+    drawer: null
+  }),
   methods :{
     async logout() {
       const url = "https://solicitasol.cordeiro.com.br/graphql"
@@ -101,8 +106,7 @@ export default {
 #logo_corsol_header {
   width: 11rem;
 }
-v-main{
-  background-color: #A2AF9F;
-  display: flex;
+#principal{
+  background-color: #324B4D;
 }
 </style>
