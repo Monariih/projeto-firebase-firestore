@@ -1,5 +1,5 @@
-
-		{"Acre":[
+	{
+			"Acre":[
 				"Acrelândia",
 				"Assis Brasil",
 				"Brasiléia",
@@ -23,7 +23,7 @@
 				"Tarauacá",
 				"Xapuri"
 			],
-		"Alagoas": [
+			"Alagoas":[
 				"Água Branca",
 				"Anadia",
 				"Arapiraca",
@@ -896,12 +896,8 @@
 				"Vila Valério",
 				"Vila Velha",
 				"Vitória"
-			]
-		},
-		{
-			"sigla": "GO",
-			"nome": "Goiás",
-			"cidades": [
+			],
+			"Goiás": [
 				"Abadia de Goiás",
 				"Abadiânia",
 				"Acreúna",
@@ -1148,12 +1144,8 @@
 				"Vicentinópolis",
 				"Vila Boa",
 				"Vila Propício"
-			]
-		},
-		{
-			"sigla": "MA",
-			"nome": "Maranhão",
-			"cidades": [
+			],
+			"Maranhão": [
 				"Açailândia",
 				"Afonso Cunha",
 				"Água Doce do Maranhão",
@@ -1371,12 +1363,8 @@
 				"Vitória do Mearim",
 				"Vitorino Freire",
 				"Zé Doca"
-			]
-		},
-		{
-			"sigla": "MG",
-			"nome": "Minas Gerais",
-			"cidades": [
+			],
+			"Minas Gerais": [
 				"Abadia dos Dourados",
 				"Abaeté",
 				"Abre Campo",
@@ -2230,12 +2218,8 @@
 				"Visconde do Rio Branco",
 				"Volta Grande",
 				"Wenceslau Braz"
-			]
-		},
-		{
-			"sigla": "MS",
-			"nome": "Mato Grosso do Sul",
-			"cidades": [
+			],
+			"Mato Grosso do Sul": [
 				"Água Clara",
 				"Alcinópolis",
 				"Amambaí",
@@ -2313,12 +2297,8 @@
 				"Terenos",
 				"Três Lagoas",
 				"Vicentina"
-			]
-		},
-		{
-			"sigla": "MT",
-			"nome": "Mato Grosso",
-			"cidades": [
+			],
+			"Mato Grosso": [
 				"Acorizal",
 				"Água Boa",
 				"Alta Floresta",
@@ -2458,12 +2438,8 @@
 				"Vera",
 				"Vila Bela da Santíssima Trindade",
 				"Vila Rica"
-			]
-		},
-		{
-			"sigla": "PA",
-			"nome": "Pará",
-			"cidades": [
+			],
+			"Pará": [
 				"Abaetetuba",
 				"Abel Figueiredo",
 				"Acará",
@@ -2607,12 +2583,8 @@
 				"Viseu",
 				"Vitória do Xingu",
 				"Xinguara"
-			]
-		},
-		{
-			"sigla": "PB",
-			"nome": "Paraíba",
-			"cidades": [
+			],
+			"Paraíba": [
 				"Água Branca",
 				"Aguiar",
 				"Alagoa Grande",
@@ -2836,12 +2808,8 @@
 				"Vieirópolis",
 				"Vista Serrana",
 				"Zabelê"
-			]
-		},
-		{
-			"sigla": "PE",
-			"nome": "Pernambuco",
-			"cidades": [
+			],
+			"Pernambuco": [
 				"Abreu e Lima",
 				"Afogados da Ingazeira",
 				"Afrânio",
@@ -3027,12 +2995,8 @@
 				"Vicência",
 				"Vitória de Santo Antão",
 				"Xexéu"
-			]
-		},
-		{
-			"sigla": "PI",
-			"nome": "Piauí",
-			"cidades": [
+			],
+			"Piauí": [
 				"Acauã",
 				"Agricolândia",
 				"Água Branca",
@@ -3255,12 +3219,8 @@
 				"Vera Mendes",
 				"Vila Nova do Piauí",
 				"Wall Ferraz"
-			]
-		},
-		{
-			"sigla": "PR",
-			"nome": "Paraná",
-			"cidades": [
+			],
+			"Paraná": [
 				"Abatiá",
 				"Adrianópolis",
 				"Agudos do Sul",
@@ -3660,12 +3620,8 @@
 				"Vitorino",
 				"Wenceslau Braz",
 				"Xambrê"
-			]
-		},
-		{
-			"sigla": "RJ",
-			"nome": "Rio de Janeiro",
-			"cidades": [
+			],
+			"Rio de Janeiro": [
 				"Angra dos Reis",
 				"Aperibé",
 				"Araruama",
@@ -3758,12 +3714,8 @@
 				"Varre-Sai",
 				"Vassouras",
 				"Volta Redonda"
-			]
-		},
-		{
-			"sigla": "RN",
-			"nome": "Rio Grande do Norte",
-			"cidades": [
+			],
+			"Rio Grande do Norte": [
 				"Acari",
 				"Açu",
 				"Afonso Bezerra",
@@ -3931,12 +3883,8 @@
 				"Vera Cruz",
 				"Viçosa",
 				"Vila Flor"
-			]
-		},
-		{
-			"sigla": "RO",
-			"nome": "Rondônia",
-			"cidades": [
+			],
+			"Rondônia": [
 				"Alta Floresta d'Oeste",
 				"Alto Alegre do Parecis",
 				"Alto Paraíso",
@@ -3989,12 +3937,8 @@
 				"Vale do Anari",
 				"Vale do Paraíso",
 				"Vilhena"
-			]
-		},
-		{
-			"sigla": "RR",
-			"nome": "Roraima",
-			"cidades": [
+			],
+			"Roraima": [
 				"Alto Alegre",
 				"Amajari",
 				"Boa Vista",
@@ -4010,12 +3954,8 @@
 				"São João da Baliza",
 				"São Luiz",
 				"Uiramutã"
-			]
-		},
-		{
-			"sigla": "RS",
-			"nome": "Rio Grande do Sul",
-			"cidades": [
+			],
+			"Rio Grande do Sul": [
 				"Aceguá",
 				"Água Santa",
 				"Agudo",
@@ -4512,12 +4452,8 @@
 				"Vitória das Missões",
 				"Westfália",
 				"Xangri-lá"
-			]
-		},
-		{
-			"sigla": "SC",
-			"nome": "Santa Catarina",
-			"cidades": [
+			],
+			"Santa Catarina": [
 				"Abdon Batista",
 				"Abelardo Luz",
 				"Agrolândia",
@@ -4811,12 +4747,8 @@
 				"Xavantina",
 				"Xaxim",
 				"Zortéa"
-			]
-		},
-		{
-			"sigla": "SE",
-			"nome": "Sergipe",
-			"cidades": [
+			],
+			"Sergipe": [
 				"Amparo de São Francisco",
 				"Aquidabã",
 				"Aracaju",
@@ -4892,12 +4824,8 @@
 				"Tobias Barreto",
 				"Tomar do Geru",
 				"Umbaúba"
-			]
-		},
-		{
-			"sigla": "SP",
-			"nome": "São Paulo",
-			"cidades": [
+			],
+			"São Paulo": [
 				"Adamantina",
 				"Adolfo",
 				"Aguaí",
@@ -5543,12 +5471,8 @@
 				"Votorantim",
 				"Votuporanga",
 				"Zacarias"
-			]
-		},
-		{
-			"sigla": "TO",
-			"nome": "Tocantins",
-			"cidades": [
+			],
+			"Tocantins": [
 				"Abreulândia",
 				"Aguiarnópolis",
 				"Aliança do Tocantins",
@@ -5689,4 +5613,4 @@
 				"Wanderlândia",
 				"Xambioá"
 			]
-		}
+	}

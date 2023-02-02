@@ -3,7 +3,6 @@
   <!-- Navbar é o cabeçalho onde segura o logo corsol,
     e aonde começa o navigation drawer é onde habita o
     menu lateral e todas as suas configurações.-->
-
   <v-app id="inspire">
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -124,22 +123,25 @@
                           label="Tipo de contrato"
                       ></v-select>
 
+
+
                     </div>
                   <div id="selectCadastro">
 
                     <v-select
                         variant="outlined"
-                        :items="estados"
                         filled
-                        label="Estado"
-                    ></v-select>
-
-                   <v-select
-                       variant="outlined"
-                      :items="cidades"
-                      filled
-                      label="Cidade"
-                    ></v-select>
+                        v-model="selectedState"
+                        :items="states"
+                        label="Selecione um estado"
+                    />
+                    <v-select
+                        variant="outlined"
+                        filled
+                        v-model="selectedCity"
+                        :items="cities[selectedState]"
+                        label="Selecione uma cidade"
+                    />
 
                   </div>
                 </div>
@@ -170,7 +172,6 @@
                       ></v-text-field>
                     </div>
                   </div>
-
                 </div>
             </v-card>
             <br>
@@ -278,53 +279,56 @@
 <script>
 import axios from "axios";
 import router from "../router";
+import statesCities from "../assets/statesCities.json"
+
 
 export default {
-  data: () => ({
 
-    /* Rules é a sequencia de regras que deve seguir o input
-    de nome fantasia.*/
+  data: () => {
+    return ({
+      selectedState: null,
+      selectedCity: null,
+      states: Object.keys(statesCities),
+      cities: statesCities,
 
-    rules: [
-      value => !!value || 'Obrigatório',
-      value => (value && value.length >= 3) || 'Minino 3 caractéres',
-    ],
+      /* Rules é a sequencia de regras que deve seguir o input
+      de nome fantasia.*/
 
-    /* Arrays feitos para substituir momentaneamente as
-     informações a serem extraidas da API*/
+      rules: [
+        value => !!value || 'Obrigatório',
+        value => (value && value.length >= 3) || 'Minino 3 caractéres',
+      ],
 
-    tiposCadastro: ['Aprovado', 'Pendente', 'Rejeitado'],
-    estados: ['Acre (AC)', 'Alagoas (AL)', 'Amapá (AP)', 'Amazonas (AM)', 'Bahia (BA)', 'Ceará (CE)', 'Distrito Federal (DF)',
-      'Espírito Santo (ES)', 'Goiás (GO)', 'Maranhão (MA)', 'Mato Grosso (MT)', 'Mato Grosso do Sul (MS)', 'Minas Gerais (MG)',
-      'Pará (PA)', 'Paraíba (PB)', 'Paraná (PR)', 'Pernambuco (PE)', 'Piauí (PI)', 'Rio de Janeiro (RJ)',
-      'Rio Grande do Norte (RN)', 'Rio Grande do Sul (RS)', 'Rondônia (RO)', 'Roraima (RR)', 'Santa Catarina (SC)',
-      'São Paulo (SP)', 'Sergipe (SE)', 'Tocantins (TO)'],
-    cidades: ['cidades', 'cidades1','cidades2'],
+      /* Arrays feitos para substituir momentaneamente as
+       informações a serem extraidas da API*/
 
-    /* Variavei responsáveis por guardas os v-models dos inputs */
+      tiposCadastro: ['Aprovado', 'Pendente', 'Rejeitado'],
 
-    imgPreview: '',
-    nomeEmpresa: '',
-    cnpj: '',
-    inscri_estadual: '',
-    nome_sobrenome: '',
-    emailAcesso: '',
-    telefone: '',
-    cadastraPassword: '',
-    required: value => !!value || 'Required.',
-    min: v => v.length >= 8 || 'Minimo 8 caracteres',
+      /* Variavei responsáveis por guardas os v-models dos inputs */
 
-    /*--------------------------------------------------------*/
-    /* Apenas dados responsáveis pelas estilizações,
-    tais como o deslize da barra de menu lateral.*/
+      imgPreview: '',
+      nomeEmpresa: '',
+      fotoempresa: '',
+      cnpj: '',
+      inscri_estadual: '',
+      nome_sobrenome: '',
+      emailAcesso: '',
+      telefone: '',
+      cadastraPassword: '',
+      required: value => !!value || 'Required.',
+      min: v => v.length >= 8 || 'Minimo 8 caracteres',
 
+      /*--------------------------------------------------------*/
+      /* Apenas dados responsáveis pelas estilizações,
+      tais como o deslize da barra de menu lateral.*/
 
-    drawer: null,
-    ex11:'primary',
-    show1: false,
-    show2: true
-    }),
-  methods : {
+      drawer: null,
+      ex11: 'primary',
+      show1: false,
+      show2: true
+    });
+  },
+  methods: {
     async criaUsuarioEmpresarial() {
       const url = "https://cordeiro.solarview.com.br/graphql"
       const query = "mutation CriarUsuarioEmpresarial($input: UserCreateInput!," +
@@ -334,7 +338,7 @@ export default {
           " {\n    nome\n    empresa {\n      nome\n" +
           "    }\n  }\n}\n"
       const headers = {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzdjp3ZWIiLCJzZXNzaW9uSWQiOiJPWnhWaF95VWhzVTY1MTcxY0ZnUUJDRjBYNE5mTjRXNSIsInN1YiI6OTg4LCJpYXQiOjE2NzQ4MjIyNjYsImV4cCI6MTY3NDg0Mzg2Nn0.rY4oznODkVd6yZCHU_DouZLZ5Fd3WkBSOe-uq04wl0U`,
+        "Authorization": `Bearer ${this.token}`,
         "content-type": "application/json"
       }
       const queryGraphql = {
