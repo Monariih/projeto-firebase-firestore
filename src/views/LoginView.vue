@@ -18,7 +18,6 @@
 import axios from "axios";
 import router from "../router";
 
-
 export default {
   data() {
     return{
@@ -26,10 +25,11 @@ export default {
       password: null,
       forcarLogin: true,
       isRemenberMe: false,
+
     }
   },
-  methods: {
 
+  methods: {
     async login() {
       const url = "https://cordeiro.solarview.com.br/graphql"
       const query = "mutation Logar($email: String!, $password: String!," +
@@ -62,7 +62,7 @@ export default {
         router.push('/home')
       }
     }
-  }
+  },
 }
 </script>
 <style>

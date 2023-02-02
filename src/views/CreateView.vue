@@ -252,7 +252,6 @@
                   </div>
                 </div>
               </div>
-
             </v-card>
 
             <br><v-divider><!-- Linha divisória horizontal --></v-divider><br>
@@ -281,9 +280,7 @@ import axios from "axios";
 import router from "../router";
 import statesCities from "../assets/statesCities.json"
 
-
 export default {
-
   data: () => {
     return ({
       selectedState: null,
@@ -337,6 +334,7 @@ export default {
           " $input, empresaInput: $empresaInput)" +
           " {\n    nome\n    empresa {\n      nome\n" +
           "    }\n  }\n}\n"
+
       const headers = {
         "Authorization": `Bearer ${this.token}`,
         "content-type": "application/json"
@@ -346,7 +344,9 @@ export default {
         "query":query,
         "variables":{
           'empresaInput':{'nome': `${this.nomeEmpresa}`,
+          'cidade': `${this.selectedCity}`,
           'cnpjCpf': `${this.cnpj}`,
+          'estado': `${this.selectedState}`,
           'inscricaoEstadual': `${this.inscri_estadual}`},
           'input':{'email':`${this.emailAcesso}`,
           'senha':`${this.cadastraPassword}`,
@@ -362,10 +362,13 @@ export default {
         data:queryGraphql
       })
 
-          .then(console.log(response),
+          .then(console.log(response))
+
+
             alert(`${this.nomeEmpresa} Criado com sucesso`),
             router.push('/home')
-          )
+
+
     },
 
 
