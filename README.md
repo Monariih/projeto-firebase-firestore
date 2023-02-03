@@ -1,29 +1,14 @@
 # teste_09
 
-This template should help get you started developing with Vue 3 in Vite.
+Este projeto começou como apenas umm teste pessoal de conexão com uma API
+até que recebi do meu chefe uma task para integrar o login e criação de 
+usuários empresas.
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+##O projeto esta disponivel em 
 
 ```sh
-npm install
+https://ambitious-sand-04b4da810.2.azurestaticapps.net/
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+##Sujeito a bugs e indisponibilidade.
