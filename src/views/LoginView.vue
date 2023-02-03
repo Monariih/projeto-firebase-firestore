@@ -25,11 +25,20 @@ export default {
       password: null,
       forcarLogin: true,
       isRemenberMe: false,
-
+      props: {
+        token: this.token
+      }
     }
   },
-
   methods: {
+    navigate() {
+      this.$router.push({
+        name: 'create',
+        props: {
+          token: this.token,
+        },
+      });
+    },
     async login() {
       const url = "https://cordeiro.solarview.com.br/graphql"
       const query = "mutation Logar($email: String!, $password: String!," +
@@ -59,7 +68,7 @@ export default {
       this.token = response.data.data.logar.token
       console.log(this.token)
       if (this.token != ""){
-        router.push('/home')
+        this.navigate()
       }
     }
   },

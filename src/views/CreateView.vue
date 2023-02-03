@@ -1,8 +1,4 @@
 <template>
-
-  <!-- Navbar é o cabeçalho onde segura o logo corsol,
-    e aonde começa o navigation drawer é onde habita o
-    menu lateral e todas as suas configurações.-->
   <v-app id="inspire">
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -281,6 +277,11 @@ import router from "../router";
 import statesCities from "../assets/statesCities.json"
 
 export default {
+  props:{
+    token :{
+      type: String,
+    }
+  },
   data: () => {
     return ({
       selectedState: null,
@@ -324,6 +325,9 @@ export default {
       show1: false,
       show2: true
     });
+  },
+  created() {
+    console.log(this.token)
   },
   methods: {
     async criaUsuarioEmpresarial() {
