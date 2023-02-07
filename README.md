@@ -8,7 +8,7 @@ usuários empresas.
 ##O projeto esta disponivel em 
 
 ```sh
-https://ambitious-sand-04b4da810.2.azurestaticapps.net/
+//////// Projeto removido do ar, trabalhando no projeto numa pasta privada da empresa
 ```
 
 ##Sujeito a bugs e indisponibilidade.
